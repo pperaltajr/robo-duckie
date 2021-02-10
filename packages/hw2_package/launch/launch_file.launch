@@ -1,1 +1,7 @@
-Hello launch
+<launch>
+    <group ns="example">
+        <node pkg=hw2_package" name="talker" type=publisher_node.py
+        <node pkg=hw2_package" name="listener" type=sub1_node.py
+    </group>
+</launch>
+
