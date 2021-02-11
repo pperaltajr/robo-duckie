@@ -6,10 +6,8 @@ from std_msgs.msg import Float32
 
 class Talker:
     def __init__(self):
-        self.pub = rospy.Publisher('publisher', Float32, queue_size=10)
+        self.pub = rospy.Publisher('input', Float32, queue_size=10)
         
-
-
     def fibonacci(self):
          # Program to display the Fibonacci sequence up to the n-th term
         
