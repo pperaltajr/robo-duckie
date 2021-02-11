@@ -6,7 +6,7 @@ from std_msgs.msg import Float32
 
 class Listener:
     def __init__(self):
-        rospy.Subscriber('publisher', Float32, self.callback)
+        rospy.Subscriber('output1', Float32, self.callback)
         
     def callback(self, data):
         rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
