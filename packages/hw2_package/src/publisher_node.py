@@ -6,7 +6,7 @@ from std_msgs.msg import String
 
 class Talker:
     def __init__(self):
-        self.pub = rospy.Publisher('publisher_node', String, queue_size=10)
+        self.pub = rospy.Publisher('chatter', String, queue_size=10)
         
     def talk(self):
         hello_str = "hello world %s" % rospy.get_time()
