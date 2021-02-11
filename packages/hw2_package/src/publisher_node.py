@@ -2,16 +2,31 @@
 # Adapted from http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29
 
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import Float32
 
 class Talker:
     def __init__(self):
-        self.pub = rospy.Publisher('chatter', String, queue_size=10)
+        self.pub = rospy.Publisher('publisher', Float32, queue_size=10)
         
-    def talk(self):
-        hello_str = "hello world %s" % rospy.get_time()
-        #rospy.loginfo(hello_str)
-        self.pub.publish(hello_str)
+
+
+    def fibonacci(self):
+         # Program to display the Fibonacci sequence up to the n-th term
+        
+        nterms = 13
+        # first two terms  
+        n1, n2, = 0, 1
+        count = 0
+       
+        while count < 10:
+            print(n1)
+            nth = n1 + n2
+            # update values
+            n1 = n2
+            n2 = nth
+            count += 1
+            self.pub.publish(n1)  
+        
         
 if __name__ == '__main__':
     try:
@@ -19,7 +34,9 @@ if __name__ == '__main__':
         t = Talker()
         rate = rospy.Rate(1) #1hz
         while not rospy.is_shutdown():
-            t.talk()
+            t.fibonacci()
             rate.sleep()
+           
+            
     except rospy.ROSInterruptException:
         pass

@@ -2,11 +2,11 @@
 # Adapted from http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29
 
 import rospy
-from std_msgs.msg import String
+from std_msgs.msg import Float32
 
 class Listener:
     def __init__(self):
-        rospy.Subscriber('chatter', String, self.callback)
+        rospy.Subscriber('publisher', Float32, self.callback)
         
     def callback(self, data):
         rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
