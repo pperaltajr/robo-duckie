@@ -1,7 +1,7 @@
 <launch>
     <group ns="example">
-        <node pkg=hw2_package" name="talker" type=publisher_node.py
-        <node pkg=hw2_package" name="listener" type=sub1_node.py
+        <node pkg="hw2_package" name="publisher_node" type="publisher_node.py"/>
+        <node pkg="hw2_package" name="sub1_node" type="sub1_node.py"/>
     </group>
 </launch>
 
