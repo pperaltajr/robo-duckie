@@ -6,7 +6,7 @@ from std_msgs.msg import Float32
 
 class Talker:
     def __init__(self):
-        self.pub = rospy.Publisher('input', Float32, queue_size=10)
+        self.pub = rospy.Publisher('publisher', Float32, queue_size=10)
         
     def fibonacci(self):
          # Program to display the Fibonacci sequence up to the n-th term
@@ -28,7 +28,7 @@ class Talker:
         
 if __name__ == '__main__':
     try:
-        rospy.init_node('talker', anonymous=True)
+        rospy.init_node('input', anonymous=True)
         t = Talker()
         rate = rospy.Rate(1) #1hz
         while not rospy.is_shutdown():
