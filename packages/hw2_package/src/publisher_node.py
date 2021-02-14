@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 import rospy
+import time
 from std_msgs.msg import Float32
+
 
 class Talker:
     def __init__(self):
@@ -24,13 +26,13 @@ class Talker:
             count += 1
             rospy.loginfo(n1)
             self.pub.publish(n1)  
-        
+            time.sleep(1)
         
 if __name__ == '__main__':
     try:
         rospy.init_node("publish_node", anonymous=True)
         t = Talker()
-        rate = rospy.Rate(.5) #0.5hz
+        rate = rospy.Rate(1) #1z
         while not rospy.is_shutdown():
             t.fibonacci()
             rate.sleep()
