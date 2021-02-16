@@ -6,7 +6,7 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):        
-        self.total = 0
+        self.total = 3.281
         self.pub_msg = UnitsLabelled()
         self.pub_msg.units = "Feet"
         rospy.Subscriber('/output2', UnitsLabelled, self.callback)
@@ -18,7 +18,7 @@ class Listener:
         self.pub_units.publish(self.pub_msg)
         
         
-        #rospy.loginfo(rospy.get_caller_id() + "I heard %s", msg)
+        rospy.loginfo(rospy.get_caller_id() + "I heard %s", self.pub_msg)
     
         
 if __name__ == '__main__':
