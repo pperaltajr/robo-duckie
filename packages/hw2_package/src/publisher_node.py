@@ -18,9 +18,8 @@ class Talker:
         count = 0
        
         while count < nterms:
-#            print(n1)
+#           print(n1)
             nth = n1 + n2
-            # update values
             n1 = n2
             n2 = nth
             count += 1
