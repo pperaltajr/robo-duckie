@@ -6,11 +6,11 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):
-        rospy.Subscriber('/output2', UnitsLabelled, self.callback2)
+        rospy.Subscriber('/output2', UnitsLabelled, self.callback)
         self.pub = rospy.Publisher('/input', Float32, queue_size=10)
         
              
-    def callback2(self, msg):
+    def callback(self, msg):
         rospy.loginfo(rospy.get_caller_id() + "I heard %s", msg)
     
         
