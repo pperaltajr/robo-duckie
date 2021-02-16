@@ -18,7 +18,7 @@ class Talker:
         count = 0
        
         while count < nterms:
-            print(n1)
+#            print(n1)
             nth = n1 + n2
             # update values
             n1 = n2
@@ -30,7 +30,7 @@ class Talker:
         
 if __name__ == '__main__':
     try:
-        rospy.init_node("publish_node", anonymous=True)
+        rospy.init_node("publish_node")
         t = Talker()
         rate = rospy.Rate(1) #1z
         while not rospy.is_shutdown():

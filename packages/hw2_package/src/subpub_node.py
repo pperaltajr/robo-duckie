@@ -16,13 +16,11 @@ class Listener:
     def callback(self, msg):
         self.pub_msg.value = self.total
         self.pub_units.publish(self.pub_msg)
-        
-        
-        rospy.loginfo(rospy.get_caller_id() + "I heard %s", self.pub_msg)
+        rospy.loginfo("%s", self.pub_msg)
     
         
 if __name__ == '__main__':
-    rospy.init_node('subpubnode', anonymous=True)
+    rospy.init_node("subpub_node")
     Listener()
     #spin() simply keeps python from exiting until this note is stopped  
     rospy.spin()   
