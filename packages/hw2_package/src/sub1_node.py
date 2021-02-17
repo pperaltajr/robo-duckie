@@ -18,7 +18,7 @@ class Listener:
     
         
 if __name__ == '__main__':
-    rospy.init_node("subsriber_node")
+    rospy.init_node("subscriber_node")
     Listener()
     #spin() simply keeps python from exiting until this note is stopped
     
