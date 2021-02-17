@@ -17,7 +17,7 @@ class Listener:
 
     def callback(self, msg):
         self.total = msg.value
-        self.pub_msg.value = self.total * 3.281
+        self.pub_msg.value = self.total
         self.pub_units.publish(self.pub_msg)
         rospy.loginfo("%s", self.pub_msg)
     

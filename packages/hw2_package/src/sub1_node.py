@@ -11,10 +11,10 @@ class Listener:
    
         
     def callback(self, data):
-        rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+        rospy.loginfo("I heard %s", data.data)
       
     def callback2(self, msg):
-        rospy.loginfo(rospy.get_caller_id() + "I heard %s", msg)
+        rospy.loginfo("I heard %s", msg)
     
         
 if __name__ == '__main__':

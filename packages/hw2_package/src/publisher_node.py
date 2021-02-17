@@ -24,7 +24,7 @@ class Talker:
             n2 = nth
             count += 1
             #rospy.loginfo(n1)
-            self.pub.publish(n1)  
+            self.pub.publish(nth)  
             time.sleep(1)
       
 if __name__ == '__main__':
