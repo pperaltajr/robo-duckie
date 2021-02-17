@@ -18,15 +18,15 @@ class Talker:
         count = 0
        
         while count < nterms:
-#           print(n1)
+            print(n1)
             nth = n1 + n2
             n1 = n2
             n2 = nth
             count += 1
-            rospy.loginfo(n1)
+            #rospy.loginfo(n1)
             self.pub.publish(n1)  
             time.sleep(1)
-        
+      
 if __name__ == '__main__':
     try:
         rospy.init_node("publisher_node")
@@ -35,7 +35,7 @@ if __name__ == '__main__':
         while not rospy.is_shutdown():
             t.fibonacci()
             rate.sleep()
-           
+            
             
     except rospy.ROSInterruptException:
         pass
