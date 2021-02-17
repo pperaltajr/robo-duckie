@@ -29,7 +29,7 @@ class Talker:
         
 if __name__ == '__main__':
     try:
-        rospy.init_node("publish_node")
+        rospy.init_node("publisher_node")
         t = Talker()
         rate = rospy.Rate(1) #1z
         while not rospy.is_shutdown():
