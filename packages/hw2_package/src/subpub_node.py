@@ -6,7 +6,7 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):        
-        self.total = 3.281
+#       self.total = 3.281
         self.pub_msg = UnitsLabelled()
         self.pub_msg.units = "Feet"
         rospy.Subscriber('/output2', UnitsLabelled, self.callback)
@@ -23,4 +23,4 @@ if __name__ == '__main__':
     rospy.init_node("subpub_node")
     Listener()
     #spin() simply keeps python from exiting until this note is stopped  
-    rospy.spin()   
+    rospy.spin()
