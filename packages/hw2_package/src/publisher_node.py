@@ -11,7 +11,7 @@ class Talker:
         
     def fibonacci(self):
         # Program to display the Fibonacci sequence up to the n-th term
-        nterms = 8
+        nterms = 100
        
         # first two terms  
         n1, n2, = 0, 1
