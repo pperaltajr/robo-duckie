@@ -6,7 +6,7 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):        
-#        self.total = 0
+#       self.total = 0
         rospy.Subscriber('/output2', UnitsLabelled, self.callback)
         self.pub_units = rospy.Publisher('/output3', UnitsLabelled, queue_size=10)        
         
@@ -19,7 +19,7 @@ class Listener:
         self.total = msg.value
         self.pub_msg.value = self.total * 3.281
         self.pub_units.publish(self.pub_msg)
-        rospy.loginfo("%s", self.pub_msg)
+        rospy.loginfo("Converting meters from fibonacci to feet: %s", self.pub_msg)
     
         
 if __name__ == '__main__':

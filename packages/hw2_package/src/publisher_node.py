@@ -23,7 +23,7 @@ class Talker:
             n1 = n2
             n2 = nth
             count += 1
-            #rospy.loginfo(n1)
+            rospy.loginfo(n1)
             self.pub.publish(nth)  
             time.sleep(1)
       
