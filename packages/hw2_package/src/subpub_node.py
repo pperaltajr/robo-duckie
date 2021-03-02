@@ -6,17 +6,24 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):
-        rospy.Subscriber('/output2', UnitsLabelled, self.callback2)
-        self.pub = rospy.Publisher('/input', Float32, queue_size=10)
-        
+#       self.total = 0
+        rospy.Subscriber('/output2', UnitsLabelled, self.callback)
+        self.pub_units = rospy.Publisher('/output3', UnitsLabelled, queue_size=10)
+        self.pub_msg = UnitsLabelled()
+        self.pub_msg.units = "Feet"
+
              
-    def callback2(self, msg):
-        rospy.loginfo(rospy.get_caller_id() + "I heard %s", msg)
+    def callback(self, msg):
+        self.total = msg.value
+        self.pub_msg.value = self.total * 3.281
+        self.pub_units.publish(self.pub_msg)
+        rospy.loginfo("Converting meters from fibonacci to feet: %s", self.pub_msg)
     
         
 if __name__ == '__main__':
-    rospy.init_node('subpubnode', anonymous=True)
+    rospy.init_node('subpub_node', anonymous=True)
     Listener()
-    #spin() simply keeps python from exiting until this note is stopped
     
-    rospy.spin()   
+    #spin() simply keeps python from exiting until this note is stopped   
+    rospy.spin()
+    
