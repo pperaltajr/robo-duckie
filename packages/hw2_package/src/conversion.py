@@ -10,11 +10,11 @@ class Listener:
         self.pub_units = rospy.Publisher('/output4', UnitsLabelled, queue_size=10)
         self.pub_msg = UnitsLabelled()
         self.pub_msg.units = "Feet"
-
+        self.total = 0
              
     def callback(self, msg):
-        if rospy.has_param("Units"):
-            self.unit = rospy.get_param("Units")
+        if rospy.has_param("meters"):
+            self.unit = rospy.get_param("meters")
         else:
             self.unit = "Feet"
             
