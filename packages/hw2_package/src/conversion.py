@@ -13,10 +13,22 @@ class Listener:
 
              
     def callback(self, msg):
-        self.total = msg.value
-        self.pub_msg.value = self.total * 3.281
+        if rospy.has_param("Units"):
+            self.unit = rospy.get_param("Units")
+        else:
+            self.unit = "Feet"
+            
+        # checks parameters and calculates based on units
+        if self.unit == "Meters":
+            self.total = msg.value
+        elif self.unit == "Feet":
+            self.total = self.total*3.281
+        elif self.unit == "Smoots":
+            self.total = self.total*1.7018
+
+        self.pub_msg.value = self.total
         self.pub_units.publish(self.pub_msg)
-        rospy.loginfo("Converting meters from fibonacci to feet: %s", self.pub_msg)
+        rospy.loginfo("Conversion output: %s", self.pub_msg)
     
         
 if __name__ == '__main__':
