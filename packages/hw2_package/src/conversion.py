@@ -6,7 +6,6 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):
-#       self.total = 0
         rospy.Subscriber('/output2', UnitsLabelled, self.callback)
         self.pub_units = rospy.Publisher('/output4', UnitsLabelled, queue_size=10)
         self.pub_msg = UnitsLabelled()
