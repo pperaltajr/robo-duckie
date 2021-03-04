@@ -1,9 +1,9 @@
 <launch>
-    <param name="Unit" type="strings" value = "Feet"/>
+    <param name="Unit" type="String" value = "Feet"/>
         <node pkg="hw2_package" name="publisher_node" type="publisher_node.py"/>
         <node pkg="mystery_package" name="mystery_node" type="mystery_node.py"/>
         <node pkg="hw2_package" name="conversion" type="conversion.py"/>
-        <remap from="/hw2_package/sub1_node" to=/hw2_package/output4"/>
+        <remap from="/hw2_package/output2" to="/hw2_package/output4"/>
         <node pkg="hw2_package" name="sub1_node" type="sub1_node.py"/>
 </launch>
 
