@@ -6,20 +6,20 @@ from mystery_package.msg import UnitsLabelled
 
 class Listener:
     def __init__(self):
-        rospy.Subscriber('/output2', UnitsLabelled, self.callback)
+        rospy.Subscriber('/output2', UnitsLabelled, self.callback2)
         self.pub_units = rospy.Publisher('/output4', UnitsLabelled, queue_size=10)
         self.pub_msg = UnitsLabelled()
         self.pub_msg.units = "Feet"
         self.total = 0
              
-    def callback(self, msg):
+    def callback2(self, msg):
         if rospy.has_param("meters"):
             self.unit = rospy.get_param("meters")
         else:
             self.unit = "Feet"
             
         # checks parameters and calculates based on units
-        if self.unit == "Meters":
+        if self.unit == "meters":
             self.total = msg.value
         elif self.unit == "Feet":
             self.total = self.total*3.281
@@ -28,7 +28,7 @@ class Listener:
 
         self.pub_msg.value = self.total
         self.pub_units.publish(self.pub_msg)
-        rospy.loginfo("Conversion output: %s", self.pub_msg)
+        rospy.loginfo("Conversion output: %s", self.pub_msg.value)
     
         
 if __name__ == '__main__':
