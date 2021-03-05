@@ -36,7 +36,7 @@ class Listener:
             self.total = msg.value * 1.7018
             self.pub_msg.value = self.total
             self.pub_units.publish(self.pub_msg)
-            rospy.loginfo("Conversion for smoots: %s", self.pub_msg)       
+            rospy.loginfo("Conversion for smoots: %s %s", self.pub_msg, rospy.get_param("units"))       
         
             #rospy.loginfo("value: %s units: %s, pub__msg.value, pub_msg.units)      
      
