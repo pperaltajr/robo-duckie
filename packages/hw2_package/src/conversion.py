@@ -26,14 +26,14 @@ class Listener:
             
         elif self.units == "feet":
             self.pub_msg.units = "feet"
-            self.total = msg.value * 3.2808
+            self.total = msg.value * 5.5833
             self.pub_msg.value = self.total
             self.pub_units.publish(self.pub_msg)
             rospy.loginfo("Conversion for feet: %s", self.pub_msg) 
             
         elif self.units == "smoots":
             self.pub_msg.units = "smoots"
-            self.total = msg.value * 0.587613
+            self.total = msg.value * 1.7018
             self.pub_msg.value = self.total
             self.pub_units.publish(self.pub_msg)
             rospy.loginfo("Conversion for smoots: %s", self.pub_msg)       
@@ -47,7 +47,4 @@ if __name__ == '__main__':
     
     #spin() simply keeps python from exiting until this note is stopped   
     rospy.spin()
-    
-    
-    
-   
+
