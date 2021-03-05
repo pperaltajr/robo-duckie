@@ -17,19 +17,19 @@ class Listener:
             self.unit = rospy.get_param("meters")
             datameters = msg.value
             rospy.loginfo("%s %s", datameters, self.unit)
-            self.pub.publish(datameters, self.pub_msg.units)
+            self.pub.publish(datameters, self.units)
             
         elif rospy.has_param("feet"):
             self.unit = rospy.get_param("feet")
             datafeet = msg.value * 3.2808
             rospy.loginfo("%s %s", datafeet, self.unit)
-            self.pub.publish(datafeet, self.pub_msg.units)
+            self.pub.publish(datafeet, self.units)
         
         elif rospy.has_param("smoots"):
             self.unit = rospy.get_param("smoots")
             datasmoots = msg.value * .587613
             rospy.loginfo("%s %s", datasmoots, self.unit)
-            self.pub.publish(datasmoots, self.pub_msg.units)
+            self.pub.publish(datasmoots, self.units)
             
         
 if __name__ == '__main__':
