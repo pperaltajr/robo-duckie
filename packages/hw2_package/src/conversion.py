@@ -9,7 +9,7 @@ class Listener:
         rospy.Subscriber('/output2', UnitsLabelled, self.callback)
         self.pub_units = rospy.Publisher('/output4', UnitsLabelled, queue_size=10)
         self.pub_msg = UnitsLabelled()
-        self.pub_msg.units = "feet"
+        self.pub_msg.units = "meters"
              
     def callback(self, msg):
         if rospy.has_param("units"):
@@ -26,17 +26,17 @@ class Listener:
             
         elif self.units == "feet":
             self.pub_msg.units = "feet"
-            self.total = msg.value * 5.5833
+            self.total = msg.value * 3.28084
             self.pub_msg.value = self.total
             self.pub_units.publish(self.pub_msg)
             rospy.loginfo("Conversion for feet: %s", self.pub_msg) 
             
         elif self.units == "smoots":
             self.pub_msg.units = "smoots"
-            self.total = msg.value * 1.7018
+            self.total = msg.value * 0.587613
             self.pub_msg.value = self.total
             self.pub_units.publish(self.pub_msg)
-            rospy.loginfo("Conversion for smoots: %s %s", self.pub_msg, rospy.get_param("units"))       
+            rospy.loginfo("Conversion for smoots: %s", self.pub_msg))       
         
             #rospy.loginfo("value: %s units: %s, pub__msg.value, pub_msg.units)      
      
