@@ -1,7 +1,7 @@
 # parameters
 ARG REPO_NAME="robo-duckie"
-ARG DESCRIPTION="Intro to viewing changes on dockerfile"
-ARG MAINTAINER="Pedro Peralta Jr. (pedro_peralta@student.uml.edu)"
+ARG DESCRIPTION="Base class repo for UML EECE 5560"
+ARG MAINTAINER="Pedro Peralta Jr. (pedro_peralta@uml.edu)"
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/
 ARG ICON="cube"
 
@@ -56,8 +56,8 @@ COPY ./dependencies-py3.txt "${REPO_PATH}/"
 RUN pip3 install --use-feature=2020-resolver -r ${REPO_PATH}/dependencies-py3.txt
 
 # copy the source code
-#COPY ./packages "${REPO_PATH}/packages"
-#COPY ./eece5560/. "${COURSE_PATH}"
+COPY ./packages "${REPO_PATH}/packages"
+COPY ./eece5560/. "${REPO_PATH}/eece5560"
 
 # build packages
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
