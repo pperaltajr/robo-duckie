@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/env python3
 
 from math import radians, sin, cos
 import numpy
@@ -9,26 +9,31 @@ class Transform:
 
     def __init__(self):
 
-        rospy.Subscriber('/output2', Vector2D, self.callback)
+        rospy.Subscriber('/input', Vector2D, self.callback)
         self.pub_robot = rospy.Publisher('/robot', Vector2D, queue_size=10)
         self.pub_world = rospy.Publisher('/world', Vector2D, queue_size=10)
-        self.values = Vector2D()
-        x = self.values.x
-        y = self.values.y
+        self.new_msg = Vector2D()
              
     def callback(self, msg):
-            
+
+        x = msg.x    
+        y = msg.y  
+        
         v = [[x],[y],[1]]
+        
+        self.values.x = self.x_value
+        self.values.y = self.y_value
+        
+        
         transform1 = numpy.matrix([[-1, 0, -1],[0, -1, 0],[0, 0, 1]])    
-        calc1 = transform * v
-        
+        self.calc1 = transform1 * v
+        self.new_msg = self.calc1
         transform2 = numpy.matrix([[-.707, -.707, 10],[.707, -.707, 5],[0, 0, 1]])    
-        calc2 = transform * v
+        self.calc2 = transform2 * calc1
         
-        self.pub_robot.publish(calc1)
-        self.pub_world.publish(calc2)
-        
-        
+        self.pub_robot.publish(self.new_msg)
+        self.pub_world.publish(self.new_msg)
+
 if __name__ == '__main__':
     rospy.init_node('transform', anonymous=True)
     Transform()
