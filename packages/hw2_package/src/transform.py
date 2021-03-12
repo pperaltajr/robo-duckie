@@ -16,23 +16,20 @@ class Transform:
              
     def callback(self, msg):
         x = msg.x    
-        y = msg.y  
+        y = msg.y         
+        rps = numpy.matrix[[x],[y],[1]]
         
-        v = [[x],[y],[1]]
+        rts = numpy.matrix([[-1, 0, -1],[0, -1, 0],[0, 0, 1]])    
+        transform = rps * rts
+        self.pub_robot.publish(transform[0,0], transform[1,0])
         
-        transform1 = numpy.matrix([[-1, 0, -1],[0, -1, 0],[0, 0, 1]])    
-        self.calc1 = transform1 * v
-        self.pub_robot.publish(1)
-        
-        transform2 = numpy.matrix([[-.707, -.707, 10],[.707, -.707, 5],[0, 0, 1]])    
-        self.calc2 = transform2 * calc1
-        self.pub_world.publish(2)
-        	
-	
+        wts = numpy.matrix([[-.707, -.707, 10],[.707, -.707, 5],[0, 0, 1]])    
+        transform2 = transform * wts
+        self.pub_world.publish(transform2[0,0], transform2[1,0])
+        		
 if __name__ == '__main__':
     rospy.init_node('transform', anonymous=True)
     Transform()
     
     #spin() simply keeps python from exiting until this note is stopped   
     rospy.spin()
-   
