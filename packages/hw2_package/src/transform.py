@@ -1,4 +1,4 @@
-#/user/bin/env python3
+#!/user/bin/env python3
 
 from math import radians, sin, cos
 import numpy
