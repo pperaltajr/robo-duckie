@@ -15,25 +15,20 @@ class Transform:
         self.new_msg = Vector2D()
              
     def callback(self, msg):
-
         x = msg.x    
         y = msg.y  
         
         v = [[x],[y],[1]]
         
-        self.values.x = self.x_value
-        self.values.y = self.y_value
-        
-        
         transform1 = numpy.matrix([[-1, 0, -1],[0, -1, 0],[0, 0, 1]])    
         self.calc1 = transform1 * v
-        self.new_msg = self.calc1
+        self.pub_robot.publish(1)
+        
         transform2 = numpy.matrix([[-.707, -.707, 10],[.707, -.707, 5],[0, 0, 1]])    
         self.calc2 = transform2 * calc1
-        
-        self.pub_robot.publish(self.new_msg)
-        self.pub_world.publish(self.new_msg)
-
+        self.pub_world.publish(2)
+        	
+	
 if __name__ == '__main__':
     rospy.init_node('transform', anonymous=True)
     Transform()
