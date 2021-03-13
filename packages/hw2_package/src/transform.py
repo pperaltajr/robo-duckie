@@ -20,11 +20,11 @@ class Transform:
         rps = numpy.matrix([[x_value],[y_value],[1]])
 
         rts = numpy.matrix([[-1, 0, -1],[0, -1, 0],[0, 0, 1]])    
-        transform = rps * rts
+        transform = rts * rps
         self.pub_robot.publish(transform[0,0], transform[1,0])
         
         wts = numpy.matrix([[-.707, -.707, 10],[.707, -.707, 5],[0, 0, 1]])    
-        transform2 = transform * wts
+        transform2 = wts * transform
         self.pub_world.publish(transform2[0,0], transform2[1,0])
         		
 if __name__ == '__main__':
