@@ -15,10 +15,10 @@ class Transform:
         self.new_msg = Vector2D()
              
     def callback(self, msg):
-        x = msg.x    
-        y = msg.y         
-        rps = numpy.matrix[[x],[y],[1]]
-        
+        x_value = msg.x    
+        y_value = msg.y         
+        rps = numpy.matrix([[x_value],[y_value],[1]])
+
         rts = numpy.matrix([[-1, 0, -1],[0, -1, 0],[0, 0, 1]])    
         transform = rps * rts
         self.pub_robot.publish(transform[0,0], transform[1,0])
