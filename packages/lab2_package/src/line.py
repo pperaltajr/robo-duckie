@@ -10,7 +10,7 @@ class Line:
 
     def __init__(self):
 
-        self.pub = rospy.Publisher('/robotcar_smd_switch_node/cmd', Twisted2DStamped, queue_size=10)
+        self.pub = rospy.Publisher('/car_smd_switch_node/cmd', Twisted2DStamped, queue_size=10)
              
     def straight(self):
         counter = 0
@@ -26,13 +26,13 @@ class Line:
             counter = counter + 1
             rate.sleep()
             if counter > 1:
-            duckieRobot.stop()
+            robot.stop()
         		
 if __name__ == '__main__':
     try:
         robot = Line()
-        rospy.init_node('Line', anonymous=True)
-        robot.straigh()
+        rospy.init_node('line', anonymous=True)
+        robot.straight()
     
     except rospy.ROSInterruptException:
         rospy.loginfo("error encountered")
