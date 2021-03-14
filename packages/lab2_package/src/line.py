@@ -9,7 +9,7 @@ class Line:
 
     def __init__(self):
 
-        self.pub = rospy.Publisher('/car_smd_switch_node/cmd', Twist2DStamped, queue_size=10)
+        self.pub = rospy.Publisher('car_smd_switch_node/cmd', Twist2DStamped, queue_size=10)
              
     def straight(self):
         counter = 0
@@ -18,14 +18,18 @@ class Line:
         moveMsg = Twist2DStamped()
         moveMsg.header.stamp = rospy.get_rostime()
         moveMsg.v = 0.234
-        moveMsg.omega = 0
+        moveMsg.omega = 0.1
         
-        while not rospy.is_shutdown():
+        self.pub.publish(moveMsg)
+        
+'''        while not rospy.is_shutdown():
             self.pub.publish(moveMsg)
             counter = counter + 1
             rate.sleep()
+            
             if counter > 1:
-                robot.stop()
+                robot.send(0,0)
+'''
         		
 if __name__ == '__main__':
     try:
