@@ -9,7 +9,7 @@ class Line:
 
     def __init__(self):
 
-        self.pub = rospy.Publisher('car_smd_switch_node/cmd', Twist2DStamped, queue_size=10)
+        self.pub = rospy.Publisher('car_cmd_switch_node/cmd', Twist2DStamped, queue_size=10)
              
     def straight(self):
         counter = 0
