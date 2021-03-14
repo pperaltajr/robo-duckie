@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
-import ransom
+import random
 from time import sleep
 from duckietown_msgs.msg import Twist2DStamped
 
