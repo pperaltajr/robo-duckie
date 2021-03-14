@@ -21,14 +21,15 @@ class Line:
         moveMsg.omega = 0.1
         
         self.pub.publish(moveMsg)
-        
-'''        while not rospy.is_shutdown():
+ 
+ '''       
+        while not rospy.is_shutdown():
             self.pub.publish(moveMsg)
             counter = counter + 1
             rate.sleep()
             
             if counter > 1:
-                robot.send(0,0)
+                robot.stop()
 '''
         		
 if __name__ == '__main__':
