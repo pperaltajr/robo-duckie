@@ -3,7 +3,6 @@
 import rospy
 import ransom
 from time import sleep
-import std_msgs.msg import Float32
 from duckietown_msgs.msg import Twist2DStamped
 
 class Line:
@@ -21,7 +20,7 @@ class Line:
         moveMsg.v = 0.234
         moveMsg.omega = 0
         
-        while not rospy.is_shudtown():
+        while not rospy.is_shutdown():
             self.pub.publish(moveMsg)
             counter = counter + 1
             rate.sleep()
