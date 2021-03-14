@@ -1,7 +1,7 @@
 <launch>
 
     <group ns=$(env VEHICLE_NAME)">
-    <node pkg="lab2_package" name="cstalker" type="cstalker.py"/>
+    <node pkg="lab2_package" name="Line" type="line.py"/>
     </group>
     
     <include file="$(find fsm)/launch/fsm_node.launch">
