@@ -1,6 +1,6 @@
 <launch>
 
-    <group ns=$(env VEHICLE_NAME)">
+    <group ns="$(env VEHICLE_NAME)">
     <node pkg="lab2_package" name="Line" type="line.py"/>
     </group>
     
