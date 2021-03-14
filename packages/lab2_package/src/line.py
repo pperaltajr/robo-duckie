@@ -25,7 +25,7 @@ class Line:
             counter = counter + 1
             rate.sleep()
             if counter > 1:
-            robot.stop()
+                robot.stop()
         		
 if __name__ == '__main__':
     try:
