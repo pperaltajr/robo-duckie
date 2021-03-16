@@ -9,7 +9,6 @@ project(lab2_package)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   duckietown_msgs
-  mystery_package
   roscpp
   rospy
   std_msgs
@@ -107,7 +106,7 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES lab2_package
-#  CATKIN_DEPENDS duckietown_msgs mystery_package roscpp rospy std_msgs
+#  CATKIN_DEPENDS duckietown_msgs roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 

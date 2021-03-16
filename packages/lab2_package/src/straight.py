@@ -5,10 +5,9 @@ import random
 from time import sleep
 from duckietown_msgs.msg import Twist2DStamped
 
-class Line:
+class Straight:
 
     def __init__(self):
-
         self.pub = rospy.Publisher('car_cmd_switch_node/cmd', Twist2DStamped, queue_size=10)
              
     def straight(self):
@@ -18,11 +17,9 @@ class Line:
         moveMsg = Twist2DStamped()
         moveMsg.header.stamp = rospy.get_rostime()
         moveMsg.v = 0.234
-        moveMsg.omega = 0.1
-        
+        moveMsg.omega = 0.1       
         self.pub.publish(moveMsg)
- 
- '''       
+'''       
         while not rospy.is_shutdown():
             self.pub.publish(moveMsg)
             counter = counter + 1
@@ -34,8 +31,8 @@ class Line:
         		
 if __name__ == '__main__':
     try:
-        robot = Line()
-        rospy.init_node('line', anonymous=True)
+        robot = Straight()
+        rospy.init_node('Straight', anonymous=True)
         robot.straight()
     
     except rospy.ROSInterruptException:
