@@ -20,8 +20,8 @@ if __name__ == '__main__':
     try:
         robot = Circle()
         rospy.init_node('Circle', anonymous=True)
-        rare = rospy.Rate(0.5)
-        robot = 0    
+        rate = rospy.Rate(0.5)
+        counter = 0    
         while not rospy.is_shutdown():
             counter = counter + 1
             robot.values(0,0)
