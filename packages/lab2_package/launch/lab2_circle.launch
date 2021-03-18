@@ -1,7 +1,7 @@
 <launch>
 
     <group ns="$(env VEHICLE_NAME)">
-    <node pkg="lab2_package" name="Circle" type="circle.py"/>
+    <node pkg="lab2_package" name="circle" type="circle.py"/>
     </group>
     
     <include file="$(find fsm)/launch/fsm_node.launch">

@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import rospy
-import random
 from std_msgs.msg import Float32
 from duckietown_msgs.msg import Twist2DStamped
 
@@ -9,22 +8,21 @@ class Circle:
     def __init__(self):
         self.pub = rospy.Publisher('car_cmd_switch_node/cmd', Twist2DStamped, queue_size=10)
              
-    def values(self, pV, pOmega):
+    def move(self,y,x):
         moveMsg = Twist2DStamped()
-        moveMsg.header.stamp = rospy.get_rostime()
-        moveMsg.v = pV
-        moveMsg.omega = pOmega       
+        moveMsg.v = y
+        moveMsg.omega = x       
         self.pub.publish(moveMsg)
         		
 if __name__ == '__main__':
     try:
+        rospy.init_node('circle')
         robot = Circle()
-        rospy.init_node('Circle', anonymous=True)
         rate = rospy.Rate(0.5)
         counter = 0    
         while not rospy.is_shutdown():
             counter = counter + 1
-            robot.values(0,0)
+            robot.move(0.7,1)
             rate.sleep()           
             if counter > 8:
                 robot.values(0,0)

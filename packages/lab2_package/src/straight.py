@@ -20,7 +20,7 @@ if __name__ == '__main__':
         robot = Straight()
         rate = rospy.Rate(10)
         count = 0
-        for c in range(0,4):
+        for c in range(0,1):
             for count in range(0,10):
                 robot.move(0,0)
                 rate.sleep()
@@ -29,9 +29,6 @@ if __name__ == '__main__':
                 rate.sleep()
             for count in range(0,10):
                 robot.move(0,0)
-                rate.sleep()
-            for count in range(0,6):
-                robot.move(0,6)
                 rate.sleep()
             robot.move(0,0)
         robot.move(0,0)
