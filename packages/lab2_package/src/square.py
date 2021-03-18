@@ -18,7 +18,7 @@ if __name__ == '__main__':
     try:
         rospy.init_node('square')
         robot = Square()
-        rate = rospy.rate(10)
+        rate = rospy.Rate(10)
         count = 0
         for c in range(0,4):
             for count in range(0,10):
@@ -31,7 +31,7 @@ if __name__ == '__main__':
                 robot.move(0,0)
                 rate.sleep()
             for count in range(0,6):
-                robot.move(0,3)
+                robot.move(0,6.4)
                 rate.sleep()
             robot.move(0,0)
         robot.move(0,0)
