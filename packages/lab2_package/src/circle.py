@@ -22,10 +22,10 @@ if __name__ == '__main__':
         counter = 0    
         while not rospy.is_shutdown():
             counter = counter + 1
-            robot.move(0.7,1)
+            robot.move(0.3,2)
             rate.sleep()           
             if counter > 8:
-                robot.values(0,0)
+                robot.move(0,0)
                 break    
     except rospy.ROSInterruptException:
         rospy.loginfo("error encountered")
