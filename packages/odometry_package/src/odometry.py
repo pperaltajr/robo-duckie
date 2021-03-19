@@ -18,12 +18,14 @@ class Odometry:
         theta = 0
         loop = 0
         
-        while (loop < 50):
+
+        
+        while (loop < 50): 
             x_value = msg.dist_wheel_left
             y_value = msg.dist_wheel_right
-        
+              
             s_delta = (x_value + y_value)/2
-            theta_delta = (x_value + y_value)/0.1
+            theta_delta = (x_value - y_value)/0.1
         
             x_delta = s_delta*cos(theta + theta_delta/2)
             y_delta = s_delta*sin(theta + theta_delta/2)
@@ -32,12 +34,12 @@ class Odometry:
             y_prime = y + y_delta
             theta_prime = theta + theta_delta    
             self.pub.publish(x_prime, y_prime, theta_prime)
-              
             loop += 1
+'''            x = x + x_delta
+               y = y + y_delta
+'''           
             
-        
-    
-        
+            
 if __name__ == '__main__':
     rospy.init_node('odometry')
     Odometry()
