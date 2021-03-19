@@ -1,7 +1,7 @@
 # parameters
 ARG REPO_NAME="robo-duckie"
 ARG DESCRIPTION="Base class repo for UML EECE 5560"
-ARG MAINTAINER="Pedro Peralta Jr. (pedro_peralta@uml.edu)"
+ARG MAINTAINER="Pedro Peralta Jr. (pedro_peralta@student.uml.edu)"
 # pick an icon from: https://fontawesome.com/v4.7.0/icons/
 ARG ICON="cube"
 
