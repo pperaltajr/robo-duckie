@@ -23,7 +23,7 @@ class Odometry:
             y_value = msg.dist_wheel_right
         
             s_delta = (x_value + y_value)/2
-            theta_delta = (x_value - y_value)/0.1
+            theta_delta = (x_value + y_value)/0.1
         
             x_delta = s_delta*cos(theta + theta_delta/2)
             y_delta = s_delta*sin(theta + theta_delta/2)
