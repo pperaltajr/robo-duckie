@@ -3,7 +3,7 @@
 import rospy
 from std_msgs.msg import Float32
 from odometry_hw.msg import DistWheel, Pose2D
-
+from duckietown_msgs.msg import Twist2DStamped
 
 class Odometry:
     def __init__(self):
