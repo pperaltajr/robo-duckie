@@ -6,7 +6,7 @@ from odometry_hw.msg import DistWheel
 
 if __name__ == "__main__":
     rospy.init_node('wheel_tick_pub', anonymous=True)
-    pub = rospy.Publisher("dist_wheel", DistWheel queue_size=10)
+    pub = rospy.Publisher("dist_wheel", DistWheel, queue_size=10)
     rate = rospy.Rate(10) # 10hz
 
     math_ready = False
