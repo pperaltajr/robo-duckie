@@ -31,7 +31,7 @@ class Odometry:
         self.pos_coordinates.x = self.pos_coordinates.x + x_delta
         self.pos_coordinates.y = self.pos_coordinates.y + y_delta
         self.pos_coordinates.theta = self.pos_coordinates.theta + theta_delta    
-            
+           
         self.pos.publish(self.pos_coordinates)         
             
 if __name__ == '__main__':
