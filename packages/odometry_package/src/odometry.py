@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-import numpy as np
 import rospy
 from std_msgs.msg import Float32
 from math import radians, sin, cos
@@ -25,8 +24,8 @@ class Odometry:
         s_delta = (x_value + y_value)/2
         theta_delta = (y_value - x_value)/(0.1)
         
-        x_delta = s_delta*np.cos(self.pos_coordinates.theta + (theta_delta/2))
-        y_delta = s_delta*np.sin(self.pos_coordinates.theta + (theta_delta/2))
+        x_delta = s_delta*cos(self.pos_coordinates.theta + (theta_delta/2))
+        y_delta = s_delta*sin(self.pos_coordinates.theta + (theta_delta/2))
         
         self.pos_coordinates.x = self.pos_coordinates.x + x_delta
         self.pos_coordinates.y = self.pos_coordinates.y + y_delta
