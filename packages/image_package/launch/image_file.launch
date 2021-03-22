@@ -1,0 +1,4 @@
+<launch>
+<node pkg="image_package" name="image" type="image.py"/>
+</launch>
+

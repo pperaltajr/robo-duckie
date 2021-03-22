@@ -40,7 +40,7 @@ class ImageCropper:
         self.yellow.publish(ros_yellow)
 
 if __name__ == '__main__':
-    rospy.init_node('image_cropper')
+    rospy.init_node('image')
     img_crop = ImageCropper()
     
     #spin() simply keeps python from exiting until this note is stopped   
