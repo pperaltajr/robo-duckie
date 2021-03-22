@@ -23,7 +23,7 @@ class ImageCropper:
         # convert to HSV, filter for white and yellow pixels      
         image_hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
         image_white = cv2.inRange(image_hsv, (0,0,215),(190,50,255))
-        image_yellow = cv2.inRange(image_hsv, (0,200,220),(40,255,255))
+        image_yellow = cv2.inRange(image_hsv, (0,60,220),(40,255,255))
         
         # mask
         output_white = cv2.bitwise_and(crop, crop, mask=image_white)
