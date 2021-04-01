@@ -24,8 +24,8 @@ if __name__ == '__main__':
             counter = counter + 1
             robot.move(0.3,2)
             rate.sleep()           
-            if counter > 8:
+            if counter > 4:
                 robot.move(0,0)
                 break    
     except rospy.ROSInterruptException:
-        pass
+        passros
