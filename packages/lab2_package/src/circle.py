@@ -28,4 +28,4 @@ if __name__ == '__main__':
                 robot.move(0,0)
                 break    
     except rospy.ROSInterruptException:
-        rospy.loginfo("error encountered")
+        pass
