@@ -1,7 +1,7 @@
 <launch>
 
     <group ns="$(env VEHICLE_NAME)">
-    <node pkg="odometry_package" name="odometry_robot" type="odometry_robot.py"/>
+    <node pkg="odometry_package" name="odometry_robot" type="robot_odometry.py"/>
     <node pkg="odometry_package" name="square" type="square.py"/>
     </group>
     
