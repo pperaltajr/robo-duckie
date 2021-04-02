@@ -17,8 +17,8 @@ class OdometryRobot:
 
     def callback(self, msg):
         # pulls distance from left and right wheel
-        x_value = msg.dist_wheel_left
-        y_value = msg.dist_wheel_right        
+        x_value = msg.dist_left
+        y_value = msg.dist_right        
         
         # performs calculations for odometry formula    
         s_delta = (x_value + y_value)/2
