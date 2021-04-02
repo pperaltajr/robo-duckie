@@ -2,13 +2,13 @@
 
 import rospy
 from math import radians, sin, cos
-from odometry_hw.msg import DistWheel, Pose2DStamped
+from duckietown_msgs.msg import WheelsCmdStamped, Pose2DStamped
 
 class OdometryRobot:
     def __init__(self):
-        rospy.Subscriber('/wheels_driver_node/wheels_cmd', DistWheel, self.callback)
+        rospy.Subscriber('/wheels_driver_node/wheels_cmd', WheelsCmdStamped, self.callback)
         self.pos = rospy.Publisher('/robot_pose', Pose2DStamped, queue_size=10)
-        self.pos_coordinates = Pose2D()
+        self.pos_coordinates = Pose2DStamped()
         
         # sets initial coordinates to zero
         self.pos_coordinates.x = 0
