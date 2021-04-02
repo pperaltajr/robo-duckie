@@ -22,7 +22,7 @@ if __name__ == '__main__':
         counter = 0    
         while not rospy.is_shutdown():
             counter = counter + 1
-            robot.move(0.27,2.3)
+            robot.move(0.23,2.3)
             rate.sleep()           
             if counter > 4:
                 robot.move(0,0)
