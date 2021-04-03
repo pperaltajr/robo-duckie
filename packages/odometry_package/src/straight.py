@@ -20,17 +20,11 @@ if __name__ == '__main__':
         robot = Straight()
         rate = rospy.Rate(10)
         count = 0
-        for c in range(0,1):
-            for count in range(0,10):
+        while not rospy.is_shutdown():
+            counter = counter + 1
+            robot.move(0.4,0)
+            rate.sleep()           
+            if counter >40:
                 robot.move(0,0)
-                rate.sleep()
-            for count in range(0,20):
-                robot.move(0.5,0)
-                rate.sleep()
-            for count in range(0,10):
-                robot.move(0,0)
-                rate.sleep()
-            robot.move(0,0)
-        robot.move(0,0)
-    except rospy.ROSInterruptException:
+                break  :
         pass

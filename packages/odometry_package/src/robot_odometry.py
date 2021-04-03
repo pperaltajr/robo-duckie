@@ -14,14 +14,10 @@ class OdometryRobot:
         self.pos_coordinates.x = 0
         self.pos_coordinates.y = 0
         self.pos_coordinates.theta = 0
-        time = rospy.get_rostime()
-        self.past_time = time.secs + (time.nsecs/10000000000)
+
         
     def callback(self, msg):
-        time = rospy.get_rostime()
-        current_time = time.secs + (time.nsecs/10000000000)
-        time_dist = current_time - self.past_time
-        self.past_time = current_time
+
         # pulls distance from left and right wheel
         x_value = msg.vel_left
         y_value = msg.vel_right        

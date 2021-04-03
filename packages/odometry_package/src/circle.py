@@ -18,13 +18,13 @@ if __name__ == '__main__':
     try:
         rospy.init_node('circle')
         robot = Circle()
-        rate = rospy.Rate(0.5)
+        rate = rospy.Rate(10)
         counter = 0    
         while not rospy.is_shutdown():
             counter = counter + 1
-            robot.move(0.23,2.3)
+            robot.move(0.23,3.8)
             rate.sleep()           
-            if counter > 4:
+            if counter >110:
                 robot.move(0,0)
                 break    
     except rospy.ROSInterruptException:

@@ -25,7 +25,7 @@ if __name__ == '__main__':
                 robot.move(0,0)
                 rate.sleep()
             for count in range(0,20):
-                robot.move(0.5,0)
+                robot.move(0.4,0)
                 rate.sleep()
             for count in range(0,10):
                 robot.move(0,0)
