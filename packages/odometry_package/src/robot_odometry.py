@@ -6,16 +6,22 @@ from duckietown_msgs.msg import WheelsCmdStamped, Pose2DStamped
 
 class OdometryRobot:
     def __init__(self):
-        rospy.Subscriber('/wheels_driver_node/wheels_cmd', WheelsCmdStamped, self.callback)
-        self.pos = rospy.Publisher('robot_pose', Pose2DStamped, queue_size=10)
+        rospy.Subscriber('wheels_driver_node/wheels_cmd', WheelsCmdStamped, self.callback)
+        self.pos = rospy.Publisher('robot_pose', Pose2DStamped, queue_size=1)
         self.pos_coordinates = Pose2DStamped()
         
         # sets initial coordinates to zero
         self.pos_coordinates.x = 0
         self.pos_coordinates.y = 0
         self.pos_coordinates.theta = 0
-
+        time = rospy.get_rostime()
+        self.past_time = time.secs + (time.nsecs/10000000000)
+        
     def callback(self, msg):
+        time = rospy.get_rostime()
+        current_time = time.secs + (time.nsecs/10000000000)
+        time_dist = current_time - self.past_time
+        self.past_time = current_time
         # pulls distance from left and right wheel
         x_value = msg.vel_left
         y_value = msg.vel_right        
@@ -32,12 +38,14 @@ class OdometryRobot:
         self.pos_coordinates.y = self.pos_coordinates.y + y_delta
         self.pos_coordinates.theta = self.pos_coordinates.theta + theta_delta    
            
-        self.pos.publish(self.pos_coordinates)         
+        self.pos.publish(self.pos_coordinates)
+     
             
 if __name__ == '__main__':
     rospy.init_node('odometry_robot')
     OdometryRobot()
-    
+
+
     #spin() simply keeps python from exiting until this note is stopped   
     rospy.spin()
     
