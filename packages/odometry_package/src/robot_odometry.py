@@ -7,7 +7,7 @@ from duckietown_msgs.msg import WheelsCmdStamped, Pose2DStamped
 class OdometryRobot:
     def __init__(self):
         rospy.Subscriber('/wheels_driver_node/wheels_cmd', WheelsCmdStamped, self.callback)
-        self.pos = rospy.Publisher('/robot_pose', Pose2DStamped, queue_size=10)
+        self.pos = rospy.Publisher('robot_pose', Pose2DStamped, queue_size=10)
         self.pos_coordinates = Pose2DStamped()
         
         # sets initial coordinates to zero
@@ -17,8 +17,8 @@ class OdometryRobot:
 
     def callback(self, msg):
         # pulls distance from left and right wheel
-        x_value = msg.dist_left
-        y_value = msg.dist_right        
+        x_value = msg.vel_left
+        y_value = msg.vel_right        
         
         # performs calculations for odometry formula    
         s_delta = (x_value + y_value)/2
