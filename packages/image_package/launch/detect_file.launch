@@ -1,0 +1,5 @@
+<launch>
+<node pkg="image_package" name="image" type="image.py"/>
+<node pkg="image_package" name="detect" type="detect.py"/>
+</launch>
+
