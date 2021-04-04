@@ -58,18 +58,18 @@ class ImageDetect:
         hough_yellow = cv2.HoughLinesP(output_yellow, 1, np.pi/180, 80, 20, 5)
         
         
-                
-    def output_lines(self, hough_white, hough_white):
-        output = np.copy(hough_white)
+        # passing output_white and hough transform to given function      
+    def output_lines(self, output_white, hough_white):
+        output = np.copy(output_white)
         if hough_white is not None:
             for i in range(len(hough_white)):
-                l = lines[i][0]
+                l = hough_white[i][0]
                 cv2.line(output, (l[0],l[1]), (l[2],l[3]), (255,0,0), 2, cv2.LINE_AA)
                 cv2.circle(output, (l[0],l[1]), 2, (0,255,0))
                 cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
         return output                      
         
-        self.hough.publish(output_lines)
+        self.hough.publish(output_lines())
         
     '''     
     def callback_white(self, msg):
