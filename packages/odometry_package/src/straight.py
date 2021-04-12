@@ -19,12 +19,14 @@ if __name__ == '__main__':
         rospy.init_node('straight')
         robot = Straight()
         rate = rospy.Rate(10)
-        count = 0
+        counter = 0
         while not rospy.is_shutdown():
             counter = counter + 1
             robot.move(0.4,0)
             rate.sleep()           
             if counter >40:
                 robot.move(0,0)
-                break  :
+                break
+        pass
+    except rospy.ROSInterruptException:
         pass

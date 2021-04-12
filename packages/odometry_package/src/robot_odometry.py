@@ -14,13 +14,20 @@ class OdometryRobot:
         self.pos_coordinates.x = 0
         self.pos_coordinates.y = 0
         self.pos_coordinates.theta = 0
-
+        time = rospy.get_rostime()
+        self.past_time = time.secs + (time.nsecs/1000000000)
         
     def callback(self, msg):
-
+        time = rospy.get_rostime()
+        current_time = time.secs + (time.nsecs/1000000000)
+        time_diff = current_time - self.past_time
+        self.past_time = current_time
+        if time_diff>1:
+            return
+        trim = .91
         # pulls distance from left and right wheel
-        x_value = msg.vel_left
-        y_value = msg.vel_right        
+        x_value = msg.vel_left * time_diff
+        y_value = msg.vel_right * time_diff * trim
         
         # performs calculations for odometry formula    
         s_delta = (x_value + y_value)/2
@@ -44,4 +51,3 @@ if __name__ == '__main__':
 
     #spin() simply keeps python from exiting until this note is stopped   
     rospy.spin()
-    
