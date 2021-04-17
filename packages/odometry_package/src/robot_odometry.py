@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import rospy
+import numpy as np
 from math import radians, sin, cos
 from duckietown_msgs.msg import WheelsCmdStamped, Pose2DStamped
 
@@ -40,7 +41,11 @@ class OdometryRobot:
         self.pos_coordinates.x = self.pos_coordinates.x + x_delta
         self.pos_coordinates.y = self.pos_coordinates.y + y_delta
         self.pos_coordinates.theta = self.pos_coordinates.theta + theta_delta    
-           
+        '''
+        self.pos_coordinates.theta = self.pos_coordinates.theta*360/(2*np.pi)
+        if self.pos_coordinates.theta > 360 or self.pos_coordinates.theta < -360:
+            self.pos_coordinates.theta = self.pos_coordinates.theta % 360   
+        '''
         self.pos.publish(self.pos_coordinates)
      
             
