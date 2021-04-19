@@ -1,17 +1,45 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python3
 
 import rospy
-from beginner_tutorials.srv import*
-    
-def add_two_ints_client(x,y):
-    rospy.wait_for_service('add_two_ints')
-    try:
-        add_two_ints = rospy.ServiceProxy('add_two_ints', AddTwoInts)
-        resp1 = add_two_ints(x,y)
-        return resp1.sum
-    except rospy.ServiceException, e:
-        print("Service call failed: %s" %e)
 
+# Brings in the SimpleActionClient
+import actionlib
+
+# Brings in the messages used by the fibonacci action, including the
+# goal message and the result message.
+import example_action_server.msg
+
+def fibonacci_client():
+    # Creates the SimpleActionClient, passing the type of the action
+    # (FibonacciAction) to the constructor.
+    print("starting client")
+    client = actionlib.SimpleActionClient('fibonacci', example_action_server.msg.FibonacciAction)
+
+    print("waiting for server")
+    # Waits until the action server has started up and started
+    # listening for goals.
+    client.wait_for_server()
+    
+    print("sending goal")
+    # Creates a goal to send to the action server.
+    goal = example_action_server.msg.FibonacciGoal(order=10)
+
+    # Sends the goal to the action server.
+    client.send_goal(goal)
+
+    print("waiting for result")
+    # Waits for the server to finish performing the action.
+    client.wait_for_result()
+
+    # Prints out the result of executing the action
+    return client.get_result()  # A FibonacciResult
 
 if __name__ == '__main__':
-    add_two_ints_client(1,2)
+    try:
+        # Initializes a rospy node so that the SimpleActionClient can
+        # publish and subscribe over ROS.
+        rospy.init_node('fibonacci_client_py')
+        result = fibonacci_client()
+        print("Result:", ', '.join([str(n) for n in result.sequence]))
+    except rospy.ROSInterruptException:
+        print("program interrupted before completion", file=sys.stderr)
