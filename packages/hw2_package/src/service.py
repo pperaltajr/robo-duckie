@@ -19,11 +19,11 @@ def fibonacci_client(num):
     rospy.loginfo("goal sent")
     
     client.wait_for_result()
-    rsopy.loginfo("goal received")
+    rospy.loginfo("goal received")
     
     return client.get_result()
     
-def fibcalc(num)
+def fibcalc(num):
     rospy.loginfo("waiting for service")
     rospy.wait_for_service("/calc_fibonacci")
     try:
