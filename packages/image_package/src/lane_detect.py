@@ -38,19 +38,19 @@ class LaneDetect:
         image_dilate_yellow = cv2.dilate(image_yellow, kernel)
         
         # find edges
-        edge_image = cv2.Canny(cv_img, 120, 255)
+        edge_image = cv2.Canny(crop, 120, 255)
         
         # while and yellow images
-        edge_white = cv2.bitwise_and(crop, crop, mask=image_dilate_white)
-        edge_yellow = cv2.bitwise_and(crop, crop, mask=image_dilate_yellow)
+        edge_white = cv2.bitwise_and(edge_image, edge_image, mask=image_dilate_white)
+        edge_yellow = cv2.bitwise_and(edge_image, edge_image, mask=image_dilate_yellow)
         
         
         #hough lines for white and yellow
-        white_hough = cv2.HoughLinesP(np.uint8(edge_white), 1, (np.pi/180), 10, minLineLength = 2, maxLineGap = 1)
-        white_hough_lines = self.output_lines(cv_img, white_hough)
+        white_hough = cv2.HoughLinesP(edge_white, 1, (np.pi/180), 10, minLineLength = 2, maxLineGap = 1)
+        white_hough_lines = self.output_lines(crop, white_hough)
         
-        yellow_hough = cv2.HoughLinesP(np.uint8(edge_yellow), 1, (np.pi/180), 7, minLineLength = 2, maxLineGap = 1)
-        yellow_hough_lines = self.output_lines(cv_img, yellow_hough)
+        yellow_hough = cv2.HoughLinesP(edge_yellow, 1, (np.pi/180), 7, minLineLength = 2, maxLineGap = 1)
+        yellow_hough_lines = self.output_lines(crop, yellow_hough)
         
         
         ros_white = self.bridge.cv2_to_imgmsg(white_hough_lines, "bgr8")
@@ -64,8 +64,8 @@ class LaneDetect:
         # Normalize
         arr_cutoff = np.array([0, offset, 0, offset])
         arr_ratio = np.array([1. / image_size[1], 1. / image_size[0], 1. / image_size[1], 1. / image_size[0]])
-        yellow_normalized = ((lines_yellow + arr_cutoff)*arr_ratio)
-        white_normalized = ((lines_white + arr_cutoff)*arr_ratio)
+        yellow_normalized = (yellow_hough + arr_cutoff) * arr_ratio
+        white_normalized = (white_hough + arr_cutoff) * arr_ratio
         
         segments = Segment()
         segmentList = SegmentList()
