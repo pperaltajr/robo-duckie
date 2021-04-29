@@ -38,7 +38,7 @@ class LaneDetect:
         image_dilate_yellow = cv2.dilate(image_yellow, kernel)
         
         # find edges
-        edge_image = cv2.Canny(self.cv_img_crop, 120, 255)
+        edge_image = cv2.Canny(cv_img, 120, 255)
         
         # while and yellow images
         edge_white = cv2.bitwise_and(crop, crop, mask=image_dilate_white)
