@@ -49,7 +49,7 @@ class LaneDetect:
         white_hough = cv2.HoughLinesP(np.uint8(edge_white), 1, (np.pi/180), 10, minLineLength = 2, maxLineGap = 1)
         white_hough_lines = self.output_lines(cv_img, white_hough)
         
-        yellow_hough = cv2.HoughLinesP(edge_yellow, 1, (np.pi/180), 7, minLineLength = 2, maxLineGap = 1)
+        yellow_hough = cv2.HoughLinesP(np.uint8(edge_yellow), 1, (np.pi/180), 7, minLineLength = 2, maxLineGap = 1)
         yellow_hough_lines = self.output_lines(cv_img, yellow_hough)
         
         
