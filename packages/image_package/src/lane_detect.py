@@ -4,13 +4,13 @@ import sys
 import numpy as np
 import rospy
 import cv2
-import duckietown_msgs.msg import Segment, SegmentList
+from duckietown_msgs.msg import Segment, SegmentList
 from cv_bridge import CvBridge
 from sensor_msgs.msg import CompressedImage, Image
 
 class LaneDetect:
     def __init__(self):
-        rospy.Subscriber("camera_node/image/compressed", CompressedImage, self.callback, queue_size=1, buff_size=2**24)
+        rospy.Subscriber("android18/camera_node/image/compressed", CompressedImage, self.callback, queue_size=1, buff_size=2**24)
         self.white = rospy.Publisher('/white_image_canny', Image, queue_size=10)
         self.yellow = rospy.Publisher('/yellow_image_canny', Image, queue_size=10)
         self.segment = rospy.Publisher('/lane_detector_node/segment_list', SegmentList, queue_size=10)
@@ -119,6 +119,6 @@ class LaneDetect:
 '''
 
 if __name__ == '__main__':
-    rospy.init_node('lab4_node')
+    rospy.init_node('lane_detect')
     LaneDetect()
     rospy.spin()
