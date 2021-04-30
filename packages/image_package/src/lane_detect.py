@@ -54,8 +54,8 @@ class LaneDetect:
         edge_white = cv2.bitwise_and(crop, crop, mask=image_dilate_white)
         edge_yellow = cv2.bitwise_and(crop, crop, mask=image_dilate_yellow)
         
-        white_output = self.bridge.cv2_to_imgmsg(edge_white, "mono8")
-        yellow_output = self.bridge.cv2_to_imgmsg(edge_yellow, "mono8")
+        white_output = self.bridge.cv2_to_imgmsg(edge_white, "bgr8")
+        yellow_output = self.bridge.cv2_to_imgmsg(edge_yellow, "bgr8")
         
         self.white.publish(white_output)
         self.yellow.publish(yellow_output)       
