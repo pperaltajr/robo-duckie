@@ -11,9 +11,12 @@ from sensor_msgs.msg import CompressedImage, Image
 class LaneDetect:
     def __init__(self):
         rospy.Subscriber("camera_node/image/compressed", CompressedImage, self.callback, queue_size=1, buff_size=2**24)
-        self.white = rospy.Publisher('/white_image_canny', Image, queue_size=10)
-        self.yellow = rospy.Publisher('/yellow_image_canny', Image, queue_size=10)
         self.segment = rospy.Publisher('/lane_detector_node/segment_list', SegmentList, queue_size=10)
+        self.crop = rospy.Publisher('/crop', Image, queue_size=10)
+        self.white = rospy.Publisher('/white_image', Image, queue_size=10)
+        self.yellow = rospy.Publisher('/yellow_image', Image, queue_size=10)
+        self.segment = rospy.Publisher('/lane_detector_node/segment_list', SegmentList, queue_size=10)
+        
         self.bridge = CvBridge()
 
     def callback(self, msg):
@@ -25,26 +28,40 @@ class LaneDetect:
         offset = 40
         new_img = cv2.resize(cv_img, image_size, interpolation=cv2.INTER_NEAREST)
         crop = new_img[offset:, :]
-        #ros_canny = self.bridge.cv2_to_imgmsg(self.canny, "mono8")
+        
+        crop_output = self.bridge.cv2_to_imgmsg(crop, "bgr8")
+        self.crop.publish(crop_output)
+        
   
         # convert to HSV, filter for white and yellow pixels      
         image_hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
-        image_white = cv2.inRange(image_hsv, (0,0,215),(190,50,255))
-        image_yellow = cv2.inRange(image_hsv, (0,60,220),(40,255,255))
+        image_white = cv2.inRange(image_hsv, (0,0,67),(170,70,255))
+        image_yellow = cv2.inRange(image_hsv, (0,60,110),(40,255,255))
+        
+
         
         # dilation
         kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (4,4))
         image_dilate_white = cv2.dilate(image_white, kernel)
         image_dilate_yellow = cv2.dilate(image_yellow, kernel)
         
+        
+        
         # find edges
         edge_image = cv2.Canny(crop, 120, 255)
         
         # while and yellow images
-        edge_white = cv2.bitwise_and(edge_image, edge_image, mask=image_dilate_white)
-        edge_yellow = cv2.bitwise_and(edge_image, edge_image, mask=image_dilate_yellow)
+        edge_white = cv2.bitwise_and(crop, crop, mask=image_dilate_white)
+        edge_yellow = cv2.bitwise_and(crop, crop, mask=image_dilate_yellow)
+        
+        white_output = self.bridge.cv2_to_imgmsg(edge_white, "mono8")
+        yellow_output = self.bridge.cv2_to_imgmsg(edge_yellow, "mono8")
+        
+        self.white.publish(white_output)
+        self.yellow.publish(yellow_output)       
         
         
+        '''       
         #hough lines for white and yellow
         white_hough = cv2.HoughLinesP(edge_white, 1, (np.pi/180), 10, minLineLength = 2, maxLineGap = 1)
         white_hough_lines = self.output_lines(crop, white_hough)
@@ -94,7 +111,7 @@ class LaneDetect:
   
   
   
-'''  
+  
     def callback_white(self, msg):
         self.cv_img_white = self.bridge.imgmsg_to_cv2(msg, "mono8")        
         if self.canny != []:
