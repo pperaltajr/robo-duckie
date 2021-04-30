@@ -15,6 +15,7 @@ class LaneDetect:
         self.white = rospy.Publisher('/white_image', Image, queue_size=10)
         self.yellow = rospy.Publisher('/yellow_image', Image, queue_size=10)   
         self.bridge = CvBridge()
+        self.loop = 0
         
     def output_lines(self, original_image, lines):
         output = np.copy(original_image)
@@ -92,10 +93,11 @@ class LaneDetect:
         for i in range(len(yellow_normalized)):
             segments.pixels_normalized[1].x = yellow_normalized[i,0,2]
             segments.pixels_normalized[1].y = yellow_normalized[i,0,3]
-            
-        
+                    
         #self.Segments.publish(segments)
-          
+        while self.loop >= 0:
+            rospy.loginfo("DETECTION IN PROGRESS")  
+            
   
 
 if __name__ == '__main__':
