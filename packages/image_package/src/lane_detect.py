@@ -14,6 +14,7 @@ class LaneDetect:
         self.Segments = rospy.Publisher('/line_detector_node/segment_list', SegmentList, queue_size=10) 
         self.white = rospy.Publisher('/white_image', Image, queue_size=10)
         self.yellow = rospy.Publisher('/yellow_image', Image, queue_size=10)   
+        self.hough = rospy.Publisher('/hough_lines', Image, queue_size=10) 
         self.bridge = CvBridge()
         self.loop = 0
         
@@ -27,7 +28,8 @@ class LaneDetect:
                 cv2.circle(output, (l[2],l[3]), 2, (0,0,255))
         return output
         
-    def callback(self, msg):
+    def callback(self, msg):   
+        rospy.loginfo("DETECTION IN PROGRESS") 
         cv_img = self.bridge.compressed_imgmsg_to_cv2(msg, "bgr8")
         
         # crop image
@@ -76,6 +78,10 @@ class LaneDetect:
         self.white.publish(ros_white)
         self.yellow.publish(ros_yellow)
         
+        
+        hough_combined = self.output_lines(yellow_hough_lines, white_hough)
+        ros_hough_combined = self.bridge.cv2_to_imgmsg(hough_combined, "bgr8")
+        self.hough.publish(ros_hough_combined)
        
         # Normalize
         arr_cutoff = np.array([0, offset, 0, offset])
@@ -95,12 +101,12 @@ class LaneDetect:
             segments.pixels_normalized[1].y = yellow_normalized[i,0,3]
                     
         #self.Segments.publish(segments)
-        while self.loop >= 0:
-            rospy.loginfo("DETECTION IN PROGRESS")  
-            
+
   
 
 if __name__ == '__main__':
     rospy.init_node('lane_detect')
     LaneDetect()
     rospy.spin()
+
+    
