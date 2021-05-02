@@ -10,7 +10,7 @@ from pid_controller import PidController
 class LaneController:
     def __init__(self):
         rospy.Subscriber("lane_filter_node/lane_pose", LanePose, self.CalculateCarCmd)
-        self.lane_controller = rospy.Publisher("lane_controller_node/car_cmd", Twist2DStamped, queue_size=10)
+        self.lane_controller = rospy.Publisher("car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.d_controller = PidController()
         self.phi_controller = PidController()
         
@@ -28,13 +28,14 @@ class LaneController:
         d_error = 0 - data.d
         phi_error = 0 - data.phi
         
-        d_control = self.d_controller.calculate(d_error, time.time())
-        phi_control = self.phi_controller.calculate(phi_error, time.time())
+        d_control = self.d_controller.Calculations(d_error, time.time())
+        phi_control = self.phi_controller.Calculations(phi_error, time.time())
         
         omega = d_control + phi_control
         
         self.SendCarCmd(0.2, omega)
         rospy.loginfo("robo-duckie controlling the lane")
+        
 if __name__ == '__main__':      
     rospy.init_node('lane_controller_node', anonymous=True)
     LaneController()

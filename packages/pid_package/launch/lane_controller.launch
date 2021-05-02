@@ -27,7 +27,7 @@
 
         <!-- Lane Following stack -->
         <arg name="lane_following" value="true"/>
-        <arg name="/lane_following/line_detection" value="false"/>
+        <arg name="/lane_following/line_detection" value="true"/>
         <arg name="line_detector_param_file_name" value="default" />
         <arg name="/lane_following/ground_projection" value="true"/>
         <arg name="/lane_following/lane_filter" value="true"/>
@@ -36,7 +36,6 @@
     </include>
 
     <group ns="$(env VEHICLE_NAME)">
-        <node pkg="image_package" name="lane_detect" type="lane_detect.py"/>
         <node pkg="pid_package" name="lane_controller_node" type="lane_controller.py"/>
     </group>
 
