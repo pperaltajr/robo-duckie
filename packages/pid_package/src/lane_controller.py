@@ -37,7 +37,7 @@ class LaneController:
         
 if __name__ == '__main__':      
     try: 
-        rospy.init_node('lane_controller_node', anonymous=True)
+        rospy.init_node('lane_controller_node_lab5', anonymous=True)
         LaneController()
         rospy.spin()
         
