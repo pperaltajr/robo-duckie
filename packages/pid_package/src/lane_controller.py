@@ -14,8 +14,8 @@ class LaneController:
         self.d_controller = PidController()
         self.phi_controller = PidController()
         
-        self.d_controller.UpdateGains(7, 0.02, 0)
-        self.phi_controller.UpdateGains(7, 0.04, 0)
+        self.d_controller.Gains(7, 0.02, 0)
+        self.phi_controller.Gains(7, 0.04, 0)
 
     def SendCarCmd(self, pV, pOmega):
         moveMsg = Twist2DStamped()
@@ -26,7 +26,7 @@ class LaneController:
         
     def CalculateCarCmd(self, data):
         d_error = 0 - data.d
-        phi_error = 0 -data.phi
+        phi_error = 0 - data.phi
         
         d_control = self.d_controller.calculate(d_error, time.time())
         phi_control = self.phi_controller.calculate(phi_error, time.time())
