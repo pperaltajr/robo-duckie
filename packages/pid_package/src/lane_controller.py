@@ -13,8 +13,8 @@ class LaneController:
         self.lane_controller = rospy.Publisher("car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.d_controller = PidController()
         self.phi_controller = PidController()
-        self.d_controller.Gains(4, 0.02, 0)
-        self.phi_controller.Gains(4, 0.04, 0)
+        self.d_controller.Gains(7, 0.02, 0)
+        self.phi_controller.Gains(7, 0.04, 0)
 
     def SendCarCmd(self, pV, pOmega):
         moveMsg = Twist2DStamped()
