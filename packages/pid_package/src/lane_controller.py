@@ -36,7 +36,7 @@ class LaneController:
         self.SendCarCmd(0.2, omega)
         
 if __name__ == '__main__':      
-    rospy.init_node('lab3_lane_controller_node', anonymous=True)
+    rospy.init_node('lane_controller_node', anonymous=True)
     LaneController()
     rospy.spin()
 
