@@ -32,7 +32,7 @@ class LaneController:
         
         omega = d_control + phi_control
         
-        self.SendCarCmd(0.2, omega)
+        self.SendCarCmd(1.7, omega)
         rospy.loginfo("robo-duckie controlling the lane")
         
 if __name__ == '__main__':      
