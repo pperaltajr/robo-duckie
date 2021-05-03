@@ -13,8 +13,8 @@ class LaneController:
         self.lane_controller = rospy.Publisher("car_cmd_switch_node/cmd", Twist2DStamped, queue_size=10)
         self.d_controller = PidController()
         self.phi_controller = PidController()
-        self.d_controller.Gains(7, 0.02, 0)
-        self.phi_controller.Gains(7, 0.04, 0)
+        self.d_controller.Gains(6, 0.02, 0)
+        self.phi_controller.Gains(6, 0.04, 0)
 
     def SendCarCmd(self, pV, pOmega):
         moveMsg = Twist2DStamped()
@@ -32,7 +32,7 @@ class LaneController:
         
         omega = d_control + phi_control
         
-        self.SendCarCmd(1.7, omega)
+        self.SendCarCmd(0.18, omega)
         rospy.loginfo("robo-duckie controlling the lane")
         
 if __name__ == '__main__':      
